@@ -104,7 +104,7 @@ public class StudentController {
     public String saveStudent(@ModelAttribute("student") StudentEntity student, Model model) {
         if (studentDAO.existsById(student.getStudentRollno())) {
             model.addAttribute("error", "Student with this roll number already exists.");
-            return "create";
+            return "redirect:/student";
         }
         studentDAO.save(student);
         return "redirect:/student";
