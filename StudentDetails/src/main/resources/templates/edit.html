@@ -1,4 +1,3 @@
-<!-- templates/create-student.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,8 +6,8 @@
 </head>
 <body>
     <div class="container mt-5">
-        <h2>Create Student</h2>
-        <form th:action="@{/students}" th:object="${student}" method="post">
+        <h2>Update Student</h2>
+        <form th:action="@{/students/{id}(id=${student.studentRollno})}" th:object="${student}" method="post">
             <div class="form-group">
                 <label>Roll No</label>
                 <input type="number" th:field="*{studentRollno}" class="form-control" required>
