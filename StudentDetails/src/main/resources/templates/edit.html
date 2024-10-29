@@ -1,0 +1,49 @@
+<!-- templates/create-student.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Update Student</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Create Student</h2>
+        <form th:action="@{/students}" th:object="${student}" method="post">
+            <div class="form-group">
+                <label>Roll No</label>
+                <input type="number" th:field="*{studentRollno}" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" th:field="*{studentName}" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label>Date of Birth</label>
+                <input type="date" th:field="*{studentDOB}" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label>Class</label>
+                <input type="text" th:field="*{studentClass}" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label>Date of Joining</label>
+                <input type="date" th:field="*{studentDOJ}" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label>District</label>
+                <input type="text" th:field="*{studentDistrict}" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label>Grade</label>
+                <input type="text" th:field="*{studentGrade}" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label>Fees Paid</label>
+                <input type="text" th:field="*{studentFeesPaid}" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-success">Save</button>
+            <a href="/" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</body>
+</html>

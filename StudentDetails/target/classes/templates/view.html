@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Students</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .search-container {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+        .search-container input[type="text"] {
+            margin-right: 5px;
+            padding: 5px;
+        }
+        .search-button {
+            border: none;
+            background: transparent;
+            cursor: pointer;
+        }
+        .search-button img {
+            width: 28px;
+            height: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Student List</h2>
+        <form id="filterForm" action="/students/search" method="GET">
+            <table class="table table-striped" style="border: 0px">
+                <tr>
+                    <td><b>Filters</b></td>
+                    <td>
+                        Class: <select name="classes">
+                            <option selected>None</option>
+                            <option th:each="class : ${studentClasses}" th:value="${class}" th:text="${class}"></option>
+                        </select>
+                    </td>
+                    <td>
+                        DOJ: <select name="doj">
+                            <option selected>None</option>
+                            <option th:each="doj : ${studentDOJs}" th:value="${#dates.format(doj, 'dd-MM-yyyy')}" th:text="${#dates.format(doj, 'dd-MM-yyyy')}"></option>
+                        </select>
+                    </td>
+                    <td>
+                        Address: <select name="address">
+                            <option selected>None</option>
+                            <option th:each="address : ${studentDistricts}" th:value="${address}" th:text="${address}"></option>
+                        </select>
+                    </td>
+                    <td>
+                        Grade: <select name="grade">
+                            <option selected>None</option>
+                            <option th:each="grade : ${studentGrades}" th:value="${grade}" th:text="${grade}"></option>
+                        </select>
+                    </td>
+                    <td>
+                        Fees Paid: <select name="fees">
+                            <option selected>None</option>
+                            <option th:each="fees : ${studentFees}" th:value="${fees}" th:text="${fees}"></option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="6" class="text-right">
+                        <button type="submit" class="btn btn-primary">Apply Filter</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="1" class="text-right">
+                        <div class="search-container">
+                            <input type="text" placeholder="Search students..." name="search" />
+                            <button type="submit" class="search-button">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnwQBXg73VDOlfDtQ356tB7KzEeGoPF7fiAw&s" alt="Search" />
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <table class="table table-striped">
+            <thead>
+                <tr style="text-align: center;">
+                    <th>Roll No</th>
+                    <th>Name</th>
+                    <th>Date of Birth</th>
+                    <th>Class</th>
+                    <th>Date of Joining</th>
+                    <th>District</th>
+                    <th>Grade</th>
+                    <th>Fees Paid</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="student : ${students}" style="text-align: center;">
+                    <td th:text="${student.studentRollno}"></td>
+                    <td th:text="${student.studentName}"></td>
+                    <td th:text="${#dates.format(student.studentDOB, 'dd-MM-yyyy')}"></td>
+                    <td th:text="${student.studentClass}"></td>
+                    <td th:text="${#dates.format(student.studentDOJ, 'dd-MM-yyyy')}"></td>
+                    <td th:text="${student.studentDistrict}"></td>
+                    <td th:text="${student.studentGrade}"></td>
+                    <td th:text="${student.studentFeesPaid}"></td>
+                    <td>
+                        <a th:href="@{'/students/edit/' + ${student.studentRollno}}" class="btn btn-warning btn-sm">Edit</a>
+                        <a th:href="@{'/students/delete/' + ${student.studentRollno}}" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <a href="/" class="btn btn-secondary">Back to Home</a>
+    </div>
+</body>
+</html>
